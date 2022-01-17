@@ -1,0 +1,27 @@
+/* eslint-disable indent */
+const Address = require('../../models/Address')
+
+const addAddress = async ({
+    street, city, state, zip,
+}) => {
+    try {
+        await Address.query().insert(
+            {
+                street,
+                city,
+                state,
+                zip,
+            },
+        )
+    } catch (err) {
+        throw new Error('failed to add address')
+    }
+}
+
+const resolver = {
+    Mutation: {
+        addAddress,
+    },
+}
+
+module.exports = resolver
